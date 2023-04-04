@@ -33,8 +33,9 @@ public class Login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         tfStaffID = new javax.swing.JTextField();
-        tfPassword = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        btnBackdoor = new javax.swing.JButton();
+        passwordField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hospital Management System");
@@ -52,18 +53,24 @@ public class Login extends javax.swing.JFrame {
 
         tfStaffID.setName("tfstaffID"); // NOI18N
 
-        tfPassword.setName("tfstaffID"); // NOI18N
-        tfPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfPasswordActionPerformed(evt);
-            }
-        });
-
         jButton1.setText("Login");
         jButton1.setName("btnLogin"); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnBackdoor.setText("Backdoor");
+        btnBackdoor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackdoorActionPerformed(evt);
+            }
+        });
+
+        passwordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordFieldActionPerformed(evt);
             }
         });
 
@@ -83,11 +90,13 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(tfStaffID)
-                        .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnBackdoor)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1))
+                    .addComponent(tfStaffID, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(passwordField, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
@@ -104,9 +113,11 @@ public class Login extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(btnBackdoor))
                 .addContainerGap(302, Short.MAX_VALUE))
         );
 
@@ -116,9 +127,9 @@ public class Login extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //
         String staffID = tfStaffID.getText();
-        String password = tfPassword.getText();
+        String password = passwordField.getText();
         tfStaffID.setText("");
-        tfPassword.setText("");
+        passwordField.setText("");
         
         System.out.println("StaffID is " + staffID);
         System.out.println("Password is: " + password);
@@ -134,21 +145,31 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void tfPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPasswordActionPerformed
+    private void btnBackdoorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackdoorActionPerformed
+        MainMenu main = new MainMenu(Login.this);
+        this.setVisible(false);
+        main.setVisible(true);
+    }//GEN-LAST:event_btnBackdoorActionPerformed
+
+    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
         String staffID = tfStaffID.getText();
-        String password = tfPassword.getText();
+        String password = passwordField.getText();
         tfStaffID.setText("");
-        tfPassword.setText("");
+        passwordField.setText("");
+        
+        System.out.println("StaffID is " + staffID);
+        System.out.println("Password is: " + password);
         
         if(staffID.equals("admin") && password.equals("1234")) {
             MainMenu main = new MainMenu(Login.this);
-            this.setVisible(false);
             main.setVisible(true);
+            dispose();
+            
         }
         else{
             JOptionPane.showMessageDialog(null, "Sorry, that password isn't right!", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_tfPasswordActionPerformed
+    }//GEN-LAST:event_passwordFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,12 +208,13 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBackdoor;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField tfPassword;
+    private javax.swing.JPasswordField passwordField;
     private javax.swing.JTextField tfStaffID;
     // End of variables declaration//GEN-END:variables
 }
